@@ -1,5 +1,6 @@
 from filterdb import Filter
 from genblock import GenBlock
+from filterdb import FilterType
 
 
 # params
@@ -15,9 +16,9 @@ class GenFiles:
 
         # open output file
         with open(outFile, "w", encoding="UTF-8") as md_file:
-            if filter != None and filter != "all_words":
-                topic = sub_filter
-                md_file.write("# " + topic + "\n\n")
+            if filter != None and filter != FilterType.ALL_WORDS:
+                header = sub_filter
+                md_file.write("# " + header + "\n\n")
             else:
                 md_file.write("# All\n\n")
 

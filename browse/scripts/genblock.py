@@ -10,11 +10,10 @@ class GenBlock:
         # 4 - mr-sentence
         # 5 - comment
 
-        if row[1] != "":
-            if row[3] != "":
-                word_block += "### " + row[0] + " *(" + row[3] + ")* = " + row[1] + "\n\n"
-            else:
-                word_block += "### " + row[0] + " = " + row[1] + "\n\n"
+        if row[3] != "":
+            word_block += "### " + row[0] + " *(" + row[3] + ")* = " + row[1] + "\n\n"
+        else:
+            word_block += "### " + row[0] + " = " + row[1] + "\n\n"
 
         if row[4] != "":
             word_block += "- Sentence - " + row[4] + "\n\n"

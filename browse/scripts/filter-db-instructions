@@ -5,6 +5,7 @@
 # - all words
 # - specific topic
 # - specific alphabet (which will be initial of the english word)
+# - missing words (words that have no Marathi equivalent currently)
 # - TBD (more can be added)
 
 # ### about invalid data filter ###

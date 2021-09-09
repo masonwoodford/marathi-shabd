@@ -1,12 +1,28 @@
 import csv
+from enum import Enum
 
-
+class FilterType(Enum):
+    INVALID_DATA = 1
+    ALL_WORDS = 2
+    TOPIC = 3
+    ALPHABET = 4
+    MISSING_WORDS = 5
 class Filter:
 
     def filter_by_invalid_data(self, row_list):
         i = 0
         while i < len(row_list):
             if row_list[i][0] == '' or row_list[i][1] == '':
+                row_list.pop(i)
+                i -= 1
+            i += 1
+
+        return row_list
+    
+    def filter_by_valid_data(self, row_list):
+        i = 0
+        while i < len(row_list):
+            if row_list[i][0] == '' or row_list[i][1] != '':
                 row_list.pop(i)
                 i -= 1
             i += 1
@@ -65,17 +81,17 @@ class Filter:
 
         row_list = self.gen_row_list(csv)
         row_list = self.sort(row_list)
+
+        if filter_type == FilterType.MISSING_WORDS:
+            return self.filter_by_valid_data(row_list)
+
         row_list = self.filter_by_invalid_data(row_list)
 
-        if filter_type == None:
+        if filter_type == FilterType.INVALID_DATA or filter_type == FilterType.ALL_WORDS or FilterType == None:
             return row_list
-        elif filter_type == "invalid_data":
-            return self.filter_by_invalid_data(row_list)
-        elif filter_type == "all_words":
-            return self.filter_by_invalid_data(row_list)
-        elif filter_type == "topic":
+        elif filter_type == FilterType.TOPIC:
             return self.filter_by_topic(sub_filter, row_list)
-        elif filter_type == "alphabet":
+        elif filter_type == FilterType.ALPHABET:
             return self.filter_by_alphabet(sub_filter, row_list)
 
 
